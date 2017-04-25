@@ -1,3 +1,5 @@
+import org.json.JSONObject;
+
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +10,7 @@ import java.util.Date;
  */
 public class ClientHelper
 {
-    public static boolean checkAvailibility(String date, String time, String employee)
+    public static JSONObject checkAvailibility(String date, String time, String employee)
     {
         System.out.println("Date: " + date);//TODO Remove this test line
         System.out.println("Time: " + time);//TODO Remove this test line
@@ -19,21 +21,14 @@ public class ClientHelper
             date = dateFormat.format(new Date());
 
         //TODO Check availibility in calendar
-        boolean availible = false;
+        boolean availible = true;
+
+
 
         if(availible)
         {
-            return true;
+            return ResponseService.toSpeak("Please provide me with your contact number", true, "SSML");
         }
-        return false;
+        return ResponseService.toSpeak("Sorry. " + employee + " will be unavailable at that time. Do you want to try for another time?", true, "SSML");
     }
-
-    public static String makeAppointment(String ClientName, String date, String time, String description, String employee)
-    {
-        //TODO Make appointment with Daniels Google Calendar
-
-        return "Appointment scheduled with " + employee + " on the " + date + " at " + time + ". Please be on time.";
-    }
-
-
 }
